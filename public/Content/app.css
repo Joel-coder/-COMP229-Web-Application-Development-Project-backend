@@ -1,0 +1,45 @@
+/*Joel Vargas*/
+
+/* custom css goes here */
+.nav-link {
+  color: #5900fe !important;
+  font-weight: 600;
+}
+.navbar-text {
+  font-size: 10px;
+  color: #5900fe;
+}
+
+.btn-primary {
+  background-color: #5900fe;
+  border-color: #5900fe;
+  opacity: 0.8;
+}
+.btn-primary.active,
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: #5900fe !important;
+  border-color: #5900fe;
+  opacity: 1;
+}
+
+.nav-item {
+  opacity: 0.8;
+}
+.nav-item:focus,
+.nav-item:hover,
+.nav-item:active {
+  opacity: 1 !important;
+}
+
+.btn-submit {
+  width: 120px;
+}
+.href-custom {
+  color: #5900fe !important;
+}
+
+.a-register,
+.a-register:hover {
+  color: #5900fe;
+}

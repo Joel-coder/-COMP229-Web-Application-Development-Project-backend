@@ -1,0 +1,47 @@
+<%- include partials/header.ejs %>
+
+<%- include partials/main_nav.ejs %>
+  
+
+  <!-- Main Content -->
+  <main class="container">
+  
+      <h1 class="display-4 text-center mt-5"><%= title %> </h1>
+      <h4 class="text-center ">You can reach out to me with using my Email below </h4>
+      <h5 class="text-center mb-2">joelvargas@gmail.com</h5>
+      <h4 class="text-center mb-2">or</h4>
+    <h4 class="text-center ">Fill your information below an d I'll contact you as soon as possible</h4>
+  </main>
+  <div class="d-flex flex-column align-items-center mt-5 w-100">
+    <form class="w-50">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="d-flex flex-row w-100 align-content-around">
+        <div class="mb-3 w-50">
+          <label for="fName" class="form-label">First Name</label>
+          <input type="text" class="form-control " id="fName">
+        </div>
+    <div class="mx-2"></div>
+        <div class="mb-3 w-50">
+            <label for="fName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="fName">
+        </div>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" rows="3"></textarea>
+          </div>
+        <a type="submit" class="btn btn-primary  btn-submit"  href="/home">Submit</a>
+        
+      </form>
+</div>
+<%- include partials/bottom_nav.ejs %>  
+
+<%- include partials/footer.ejs %>
+  
+
+
+
+
