@@ -70,7 +70,7 @@ module.exports.processUpdateList = (req, res, next) => {
       res.end(err);
     } else {
       console.log(updateContact);
-      res.redirect("/contactInfo");
+      //  res.redirect("/contactInfo");
     }
   });
 };

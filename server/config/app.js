@@ -31,7 +31,6 @@ mongoDB.once("open", () => {
   console.log("Connected to MongoDB..");
 });
 
-let indexRouter = require("../routes/index");
 let usersRouter = require("../routes/users");
 let credentialRouter = require("../routes/credentials");
 let ContactInfoRouter = require("../routes/businessContactsList");
@@ -98,7 +97,6 @@ let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
 
 passport.use(strategy);
 
-app.use("/", indexRouter);
 app.use("/users", usersRouter);
 //app.use("/login", credentialRouter);
 app.use("/contactInfo", ContactInfoRouter);
