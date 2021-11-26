@@ -31,16 +31,16 @@ mongoDB.once("open", () => {
   console.log("Connected to MongoDB..");
 });
 
-let usersRouter = require("../routes/users");
-let credentialRouter = require("../routes/credentials");
+//let usersRouter = require("../routes/users");
+//let credentialRouter = require("../routes/credentials");
 let ContactInfoRouter = require("../routes/businessContactsList");
 
 let app = express();
 
 // view engine setup
-app.set("views", path.join(__dirname, "../views"));
+//app.set("views", path.join(__dirname, "../views"));
 // express  -e
-app.set("view engine", "ejs");
+//app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -67,37 +67,39 @@ const cors = require("cors");
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({ origin: "http://localhost:3000" }));
+//app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
 //Passport user configuration
 
 //create a user model iinstance
-let userModel = require("../models/user");
-let User = userModel.User;
+// let userModel = require("../models/user");
+// let User = userModel.User;
 
-// implement a User Authentication Strategy
-passport.use(User.createStrategy());
+// // implement a User Authentication Strategy
+// passport.use(User.createStrategy());
 
-//serialize and deserialize the user info
+// //serialize and deserialize the user info
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
-let jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = DB.Secret;
+// let jwtOptions = {};
+// jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+// jwtOptions.secretOrKey = DB.Secret;
 
-let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
-  User.findById(jwt_payload.id)
-    .then((user) => {
-      return done(null, user);
-    })
-    .catch((err) => {
-      return done(err, false);
-    });
-});
+// let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
+//   User.findById(jwt_payload.id)
+//     .then((user) => {
+//       return done(null, user);
+//     })
+//     .catch((err) => {
+//       return done(err, false);
+//     });
+// });
 
-passport.use(strategy);
+// passport.use(strategy);
 
-app.use("/users", usersRouter);
+//app.use("/users", usersRouter);
 //app.use("/login", credentialRouter);
 app.use("/contactInfo", ContactInfoRouter);
 // catch 404 and forward to error handler
