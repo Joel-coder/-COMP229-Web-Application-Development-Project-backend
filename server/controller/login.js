@@ -66,7 +66,7 @@ module.exports.processRegisterPage = (req, res, next) => {
           "registerMessage",
           "Registration Error: User Already Exists!"
         );
-        console.log("Error: User Already Exists!");
+        console.log("Error: User Alredy Exists!");
       }
     } else {
       // if no error exists, then registration is successful

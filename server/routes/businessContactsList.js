@@ -15,12 +15,14 @@ let listController = require("../controller/businessContactsList");
 function requireAuth(req, res, next) {
   // check if the user is logged in
   if (!req.isAuthenticated()) {
-    return res.redirect("/login");
+    return res.json({
+      success: false,
+    });
   }
   next();
 }
 
-router.get("/", listController.displayContactList);
+router.get("/", requireAuth, listController.displayContactList);
 
 /*Create operation*/
 router.get("/add", listController.displayAddList);
