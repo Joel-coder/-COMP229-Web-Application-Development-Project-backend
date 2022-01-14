@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, "../../node_modules")));
 //Setup express session
 app.use(
   session({
-    secret: "someSecret",
+    secret: DB.Secret,
     saveUninitialized: false,
     resave: false,
   })
@@ -81,7 +81,7 @@ passport.deserializeUser(User.deserializeUser());
 
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = "SomeSecret";
+jwtOptions.secretOrKey = DB.Secret;
 
 let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
   User.findById(jwt_payload.id)

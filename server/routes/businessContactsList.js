@@ -13,14 +13,13 @@ let listController = require("../controller/businessContactsList");
 
 // helper function for guard purposes
 let token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzVkNGFkNmQ3NjQ5N2U3MmZiMjg4NiIsInVzZXJuYW1lIjoianZhcmdhcyIsImlhdCI6MTY0MjEzMzE0MiwiZXhwIjoxNjQyNzM3OTQyfQ.4SntMhcaCPnAPtsEHiQIeZnWbPcbdW8pHcBGMTP3ivM";
-async function requireAuth(req, err, next) {
-  try {
-    var decoded = await jwt.verify(token, DB.Secret);
-  } catch {
-    err;
-  }
-  next();
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzVkNGFkNmQ3NjQ5N2U3MmZiMjg4NiIsInVzZXJuYW1lIjoianZhcmdhcyIsImlhdCI6MTY0MjEzNjI3MCwiZXhwIjoxNjQyNzQxMDcwfQ.J_zuFUh9X0VViXfCqH3-p4C8AuN-Ww2qZqMv9jcb91o";
+async function requireAuth(req, res, next) {
+  jwt.verify(token, DB.Secret, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
 }
 
 router.get("/", requireAuth, listController.displayContactList);

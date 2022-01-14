@@ -63,28 +63,15 @@ module.exports.processLoginPage = (req, res, next) => {
   })(req, res, next);
 };
 
-module.exports.displayRegisterPage = (req, res, next) => {
-  // check if the user is not already logged in
-  if (!req.user) {
-    res.render("auth/register", {
-      title: "Register",
-      messages: req.flash("registerMessage"),
-      displayName: req.user ? req.user.displayName : "",
-    });
-  } else {
-    return res.redirect("/");
-  }
-};
-
 module.exports.processRegisterPage = (req, res, next) => {
   // instantiate a user object
   let newUser = new User({
     username: req.body.username,
-    //password: req.body.password
+    password: req.body.password,
     email: req.body.email,
     displayName: req.body.displayName,
   });
-
+  console.log(req.body);
   User.register(newUser, req.body.password, (err) => {
     if (err) {
       console.log("Error: Inserting New User");
@@ -95,11 +82,7 @@ module.exports.processRegisterPage = (req, res, next) => {
         );
         console.log("Error: User Already Exists!");
       }
-      return res.render("auth/register", {
-        title: "Register",
-        messages: req.flash("registerMessage"),
-        displayName: req.user ? req.user.displayName : "",
-      });
+      return res.json({ success: false, msg: err });
     } else {
       // if no error exists, then registration is successful
 
