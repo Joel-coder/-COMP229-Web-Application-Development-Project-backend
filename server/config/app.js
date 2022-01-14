@@ -74,27 +74,6 @@ let User = userModel.User;
 // implement a User Authentication Strategy
 passport.use(User.createStrategy());
 
-//serialize and deserialize the user info
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-let jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = DB.Secret;
-
-let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
-  User.findById(jwt_payload.id)
-    .then((user) => {
-      return done(null, user);
-    })
-    .catch((err) => {
-      return done(err, false);
-    });
-});
-
-passport.use(strategy);
-
 app.use("/", usersRouter);
 //app.use("/login", credentialRouter);
 app.use("/contactInfo", ContactInfoRouter);
