@@ -85,14 +85,6 @@ module.exports.processRegisterPage = (req, res, next) => {
       }
       return res.json({ success: false, msg: err });
     } else {
-      // if no error exists, then registration is successful
-
-      // redirect the user and authenticate them
-
-      /* TODO - Getting Ready to convert to API
-          res.json({success: true, msg: 'User Registered Successfully!'});
-          */
-
       return passport.authenticate("local")(req, res, () => {
         res.json({ success: true, msg: "User Registered Successfully!" });
       });
