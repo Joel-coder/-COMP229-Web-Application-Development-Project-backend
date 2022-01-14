@@ -72,6 +72,7 @@ module.exports.processRegisterPage = (req, res, next) => {
     displayName: req.body.displayName,
   });
   console.log(req.body);
+  //passing err to my callback function
   User.register(newUser, req.body.password, (err) => {
     if (err) {
       console.log("Error: Inserting New User");
