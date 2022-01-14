@@ -39,7 +39,7 @@ let app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3000", credential: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../../public")));
@@ -81,7 +81,7 @@ passport.deserializeUser(User.deserializeUser());
 
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = DB.Secret;
+jwtOptions.secretOrKey = "SomeSecret";
 
 let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
   User.findById(jwt_payload.id)
@@ -110,7 +110,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
   // render the error page
   res.status(err.status || 500);
-  res.render("error", { title: "Error" });
+  res.render("error", { title: "Eror" });
 });
 
 module.exports = app;

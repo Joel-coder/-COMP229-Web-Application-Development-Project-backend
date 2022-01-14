@@ -10,6 +10,7 @@
     "npm": "^6.0.0"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.2",
     "bootstrap-icons": "^1.5.0",

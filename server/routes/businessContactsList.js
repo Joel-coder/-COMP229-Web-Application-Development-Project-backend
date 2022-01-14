@@ -1,7 +1,7 @@
 let express = require("express");
 let router = express.Router();
 let mongoose = require("mongoose");
-
+let DB = require("../config/db");
 let jwt = require("jsonwebtoken");
 
 let passport = require("passport");
@@ -12,12 +12,13 @@ let listController = require("../controller/businessContactsList");
 /* Read operation */
 
 // helper function for guard purposes
-function requireAuth(req, res, next) {
-  // check if the user is logged in
-  if (!req.isAuthenticated()) {
-    return res.json({
-      success: false,
-    });
+let token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNzVkNGFkNmQ3NjQ5N2U3MmZiMjg4NiIsInVzZXJuYW1lIjoianZhcmdhcyIsImlhdCI6MTY0MjEzMzE0MiwiZXhwIjoxNjQyNzM3OTQyfQ.4SntMhcaCPnAPtsEHiQIeZnWbPcbdW8pHcBGMTP3ivM";
+async function requireAuth(req, err, next) {
+  try {
+    var decoded = await jwt.verify(token, DB.Secret);
+  } catch {
+    err;
   }
   next();
 }
