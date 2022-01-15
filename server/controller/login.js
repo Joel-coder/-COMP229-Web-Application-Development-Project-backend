@@ -11,6 +11,7 @@ let User = userModel.User;
 
 module.exports.processLoginPage = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
+    console.log("this is the user", user);
     // server err?
     if (err) {
       return next(err);

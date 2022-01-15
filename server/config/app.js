@@ -44,7 +44,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../../public")));
 app.use(express.static(path.join(__dirname, "../../node_modules")));
 
-//Setup express session
+//Setup express session to identify the user
 app.use(
   session({
     secret: DB.Secret,
@@ -78,21 +78,24 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-let jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = DB.Secret;
+// let jwtOptions = {};
+// jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+// //jwtOptions.jwtFromRequest = ExtractJWT.fromUrlQueryParameter("token");
+// //setting secretOrKey for verifying the token's signature
+// jwtOptions.secretOrKey = DB.Secret;
+// let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
+//   //jwt_payload is an object literal containing the decoded JWT payload.
 
-let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
-  User.findById(jwt_payload.id)
-    .then((user) => {
-      return done(null, user);
-    })
-    .catch((err) => {
-      return done(err, false);
-    });
-});
+//   User.findById(jwt_payload.id)
+//     .then((user) => {
+//       return done(null, user);
+//     })
+//     .catch((err) => {
+//       return done(err, false);
+//     });
+// });
 
-passport.use(strategy);
+// passport.use(strategy);
 
 app.use("/", usersRouter);
 //app.use("/login", credentialRouter);
