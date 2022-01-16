@@ -4,8 +4,12 @@ let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
+
 // modules for authentication
+let session = require("express-session");
 let passport = require("passport");
+
+let passportJWT = require("passport-jwt");
 
 let flash = require("connect-flash");
 
@@ -38,11 +42,27 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../../public")));
 app.use(express.static(path.join(__dirname, "../../node_modules")));
 
+//Setup express session to identify the user
+app.use(
+  session({
+    secret: DB.Secret,
+    saveUninitialized: false,
+    resave: false,
+  })
+);
+
 // initialize flash
 app.use(flash());
 
 //Initialize passport
 app.use(passport.initialize());
+app.use(passport.session());
+
+//Routes for register
+
+//app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
+//Passport user configuration
 
 //create a user model iinstance
 let userModel = require("../models/user");
@@ -54,6 +74,7 @@ passport.use(User.createStrategy());
 //serialize and deserialize the user info
 
 passport.serializeUser(User.serializeUser());
+
 passport.deserializeUser(User.deserializeUser());
 
 app.use("/", usersRouter);

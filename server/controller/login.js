@@ -14,7 +14,9 @@ module.exports.processLoginPage = (req, res, next) => {
     console.log("this is the user", user);
     // server err?
     if (err) {
-      return next(err);
+      return res.json({
+        success: false,
+      });
     }
     // is there a user login error?
     if (!user) {
